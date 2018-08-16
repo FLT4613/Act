@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.util.FlxColor;
 import flixel.FlxState;
 import flixel.FlxSprite;
+using flixel.util.FlxSpriteUtil;
 
 class PlayState extends FlxState {
   var hero = new FlxSprite();
@@ -13,13 +14,17 @@ class PlayState extends FlxState {
     // 背景
     var backGround = new FlxSprite(0, 0);
     backGround.makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(240, 240, 240));
+    // 地面
+    var lineStyle:LineStyle = { color: FlxColor.fromRGB(200, 200, 200), thickness: 3 };
+    backGround.drawLine(0, FlxG.height-30, FlxG.width, FlxG.height-30, lineStyle);
     this.add(backGround);
 
     hero.loadGraphic(AssetPaths.archer__png, true, 32, 32, true);
     hero.animation.add("Idle", [0], 1, true);
     hero.animation.add("Move", [0, 1, 2, 3], 10, true);
 
-    hero.setPosition(100, 100);
+
+    hero.setPosition(100, FlxG.height-hero.height-10);
     hero.animation.play("Idle");
     this.add(hero);
   }
