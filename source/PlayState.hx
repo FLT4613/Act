@@ -22,6 +22,7 @@ class PlayState extends FlxState {
     hero.loadGraphic(AssetPaths.archer__png, true, 32, 32, true);
     hero.animation.add("Idle", [0], 1, true);
     hero.animation.add("Move", [0, 1, 2, 3], 10, true);
+    hero.animation.add("Attack", [5, 6, 6, 6, 6, 6, 6, 6, 6, 7], 10, false);
 
 
     hero.setPosition(100, FlxG.height-hero.height-10);
@@ -32,14 +33,19 @@ class PlayState extends FlxState {
   override public function update(elapsed:Float):Void {
     super.update(elapsed);
 
+
     if(FlxG.keys.pressed.RIGHT) {
       hero.x += 3;
       hero.animation.play("Move");
     } else if(FlxG.keys.pressed.LEFT) {
       hero.x -= 3;
       hero.animation.play("Move");
+    } else if(FlxG.keys.justPressed.SPACE) {
+      hero.animation.play("Attack");
     } else {
-      hero.animation.play("Idle");
+      if(hero.animation.name=="Move" || hero.animation.finished) {
+        hero.animation.play("Idle");
+      }
     }
 
   }
