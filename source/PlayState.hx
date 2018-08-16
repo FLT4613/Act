@@ -12,7 +12,7 @@ class PlayState extends FlxState {
 
     // 背景
     var backGround = new FlxSprite(0, 0);
-    backGround.makeGraphic(FlxG.width, FlxG.height, FlxColor.WHITE);
+    backGround.makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(240, 240, 240));
     this.add(backGround);
 
     hero.loadGraphic(AssetPaths.archer__png, true, 32, 32, true);
