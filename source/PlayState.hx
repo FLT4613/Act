@@ -24,5 +24,14 @@ class PlayState extends FlxState {
 
   override public function update(elapsed:Float):Void {
     super.update(elapsed);
+
+    if(FlxG.keys.pressed.RIGHT) {
+      hero.x += 10;
+    }
+
+    if(FlxG.keys.pressed.LEFT) {
+      hero.x -= 10;
+    }
+
   }
 }
