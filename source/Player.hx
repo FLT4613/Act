@@ -10,12 +10,12 @@ class Player extends FlxSprite {
   public function new() {
     super();
     fsm = new FlxFSM<Player>(this);
-    this.setFacingFlip(FlxObject.LEFT, true, false);
-    this.setFacingFlip(FlxObject.RIGHT, false, false);
-    this.loadGraphic(AssetPaths.archer__png, true, 32, 32, true);
-    this.animation.add("Stand", [0], 1, true);
-    this.animation.add("Move", [0, 1, 2, 3], 10, true);
-    this.animation.add("Attack", [5, 6, 7], 10, false);
+    setFacingFlip(FlxObject.LEFT, true, false);
+    setFacingFlip(FlxObject.RIGHT, false, false);
+    loadGraphic(AssetPaths.archer__png, true, 32, 32, true);
+    animation.add("Stand", [0], 1, true);
+    animation.add("Move", [0, 1, 2, 3], 10, true);
+    animation.add("Attack", [5, 6, 7], 10, false);
     fsm.transitions
     .add(Stand, Attack, function(_)return FlxG.keys.pressed.SPACE)
     .add(Attack, Stand, function(owner)return owner.animation.finished)
