@@ -15,8 +15,11 @@ class Player extends FlxSprite {
     this.loadGraphic(AssetPaths.archer__png, true, 32, 32, true);
     this.animation.add("Stand", [0], 1, true);
     this.animation.add("Move", [0, 1, 2, 3], 10, true);
-    this.animation.add("Attack", [5, 6, 6, 6, 6, 6, 7, 7, 7], 10, false);
-    fsm.state = new Stand();
+    this.animation.add("Attack", [5, 6, 7], 10, false);
+    fsm.transitions
+    .add(Stand, Attack, function(_)return FlxG.keys.pressed.SPACE)
+    .add(Attack, Stand, function(owner)return owner.animation.finished)
+    .start(Stand);
   }
 
   override public function update(elapsed:Float) {
@@ -39,7 +42,17 @@ class Stand extends FlxFSMState<Player> {
       owner.acceleration.x = FlxG.keys.pressed.LEFT ? -100 : 100;
     } else {
       owner.animation.play("Stand");
-      owner.velocity.x *= 0;
+      owner.velocity.x *= 0.9;
     }
+  }
+}
+
+class Attack extends FlxFSMState<Player> {
+  override public function enter(owner:Player, fsm:FlxFSM<Player>):Void {
+    owner.animation.play("Attack");
+  }
+  override public function update(elapsed:Float, owner:Player, fsm:FlxFSM<Player>):Void {
+    owner.acceleration.x = 0;
+    owner.velocity.x *= 0.9;
   }
 }
