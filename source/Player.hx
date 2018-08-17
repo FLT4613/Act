@@ -55,4 +55,7 @@ class Attack extends FlxFSMState<Player> {
     owner.acceleration.x = 0;
     owner.velocity.x *= 0.9;
   }
+  override public function exit(owner:Player):Void {
+    PlayState.arrows.add(new Arrow(owner.x, owner.y, FlxG.random.int(10, 1000), FlxG.random.int(10, 1000)));
+  }
 }

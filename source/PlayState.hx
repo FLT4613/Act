@@ -4,12 +4,15 @@ import flixel.FlxG;
 import flixel.util.FlxColor;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.group.FlxGroup;
 using flixel.util.FlxSpriteUtil;
 
 import Player;
 
 class PlayState extends FlxState {
   var player:Player;
+  public static var arrows:FlxTypedGroup<Arrow>;
+
   override public function create():Void {
     super.create();
 
@@ -23,6 +26,8 @@ class PlayState extends FlxState {
     var player = new Player();
     player.setPosition(100, FlxG.height-player.height-10);
     this.add(player);
+    arrows = new FlxTypedGroup<Arrow>();
+    this.add(arrows);
   }
 
   override public function update(elapsed:Float):Void {
