@@ -6,8 +6,10 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 using flixel.util.FlxSpriteUtil;
 
+import Player;
+
 class PlayState extends FlxState {
-  var hero = new FlxSprite();
+  var Player:Player;
   override public function create():Void {
     super.create();
 
@@ -18,35 +20,12 @@ class PlayState extends FlxState {
     var lineStyle:LineStyle = { color: FlxColor.fromRGB(200, 200, 200), thickness: 3 };
     backGround.drawLine(0, FlxG.height-30, FlxG.width, FlxG.height-30, lineStyle);
     this.add(backGround);
-
-    hero.loadGraphic(AssetPaths.archer__png, true, 32, 32, true);
-    hero.animation.add("Idle", [0], 1, true);
-    hero.animation.add("Move", [0, 1, 2, 3], 10, true);
-    hero.animation.add("Attack", [5, 6, 6, 6, 6, 6, 7, 7, 7], 10, false);
-
-
-    hero.setPosition(100, FlxG.height-hero.height-10);
-    hero.animation.play("Idle");
-    this.add(hero);
+    var Player = new Player();
+    Player.setPosition(100, FlxG.height-Player.height-10);
+    this.add(Player);
   }
 
   override public function update(elapsed:Float):Void {
     super.update(elapsed);
-
-
-    if(FlxG.keys.pressed.RIGHT) {
-      hero.x += 1;
-      hero.animation.play("Move");
-    } else if(FlxG.keys.pressed.LEFT) {
-      hero.x -= 1;
-      hero.animation.play("Move");
-    } else if(FlxG.keys.justPressed.SPACE) {
-      hero.animation.play("Attack");
-    } else {
-      if(hero.animation.name=="Move" || hero.animation.finished) {
-        hero.animation.play("Idle");
-      }
-    }
-
   }
 }
