@@ -9,7 +9,7 @@ using flixel.util.FlxSpriteUtil;
 import Player;
 
 class PlayState extends FlxState {
-  var Player:Player;
+  var player:Player;
   override public function create():Void {
     super.create();
 
@@ -20,9 +20,9 @@ class PlayState extends FlxState {
     var lineStyle:LineStyle = { color: FlxColor.fromRGB(200, 200, 200), thickness: 3 };
     backGround.drawLine(0, FlxG.height-30, FlxG.width, FlxG.height-30, lineStyle);
     this.add(backGround);
-    var Player = new Player();
-    Player.setPosition(100, FlxG.height-Player.height-10);
-    this.add(Player);
+    var player = new Player();
+    player.setPosition(100, FlxG.height-player.height-10);
+    this.add(player);
   }
 
   override public function update(elapsed:Float):Void {
